@@ -1,7 +1,8 @@
 class User < ApplicationRecord
+	before_create :create_remember_token
 	attr_accessor :remember_token
 
-	before_create :create_remember_token
+	has_many :posts	
 	has_secure_password
 
 	def new_token

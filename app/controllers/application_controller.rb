@@ -1,12 +1,13 @@
 class ApplicationController < ActionController::Base
 	protect_from_forgery with: :exception
 
-	helper_method :current_user
+	helper_method :current_user, :logged_in?
 	
 	def log_in(user)
 		session[:user_id] = user.id
 		user.remember_token = user.new_token
 		cookies.permanent[:remember_token] = user.remember_token
+		current_user=(user)
 	end
 
 	def sign_out
@@ -14,6 +15,13 @@ class ApplicationController < ActionController::Base
   		cookies.signed[:remember_token] = nil
   		session.clear
   		redirect_to login_url
+	end
+
+	def logged_in?
+		if current_user.nil? then
+			flash[:error] = "You must be logged in to make posts"
+			redirect_to login_url
+		end
 	end
 
 	def current_user

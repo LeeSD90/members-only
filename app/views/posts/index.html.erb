@@ -1,0 +1,8 @@
+<% @posts.each do |p| %>
+<h1>Title: <%= p.title %></h1>
+<h5><%= p.content %></h5>
+	<% if current_user %>
+		<b>Author:</b> <%= User.find(p.user_id).name %>
+	<% end %>
+<hr />
+<% end %>

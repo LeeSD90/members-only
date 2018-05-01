@@ -16,17 +16,19 @@
       <% end %>
       <%= yield %>
       <footer class="page-footer font-small blue pt-4 mt-4">
+      <div class="col-md-6 col-md-offset-3">
       <div class="container-fluid text-center text-md-left">
         <div class="row">
-
-          
-          <div class="col-md-5">
             <% if current_user then %>
               Logged in as <%= current_user.name %>. <%= link_to "Log out", logout_path, :method => :delete %>
-            <% end %>
-          </div>
         </div>
+        <div class="row">
+          <%= link_to "New Post", new_post_path %>
+          <% end %>
+        </div>
+        <%= link_to "View Posts", posts_path %>
       </div>
+    </div>
     </footer>
     </div>
   </body>
